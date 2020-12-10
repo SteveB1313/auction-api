@@ -6,3 +6,11 @@ body {
 a {
   color: #00B7FF;
 }
+
+bids {
+  display: flex;
+  flex-wrap: wrap;
+  width: 90%;
+  margin: 0 auto;
+  justify-content: space-between;
+}
