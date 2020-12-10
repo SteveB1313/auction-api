@@ -6,11 +6,10 @@ async function fetchBids() {
     const response = await fetch('http://localhost:3000/bids');
     const json = await response.json();
     json.data.forEach((bid) => {
-        const span = document.createElement('span');
-        span.innerHTML = "<br>";
+        const lineBreak = document.createElement('br');
         const user = document.createTextNode(bid.user + " - " + bid.bid);
         bidsElement.appendChild(user);
-        bidsElement.appendChild(span);
+        bidsElement.appendChild(lineBreak);
         console.log(bid.user);
     })
 }
