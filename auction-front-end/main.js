@@ -15,3 +15,12 @@ async function fetchBids() {
 }
 
 fetchBids();
+
+// wait for the DOM to be loaded
+$(function() {
+    // bind 'myForm' and provide a simple callback function
+    $('#bidForm').ajaxForm(function() {
+      setTimeout(function () { window.location.reload(); }, 1);
+      alert("Thank you for your bid.")
+    });
+  });

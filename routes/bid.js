@@ -4,7 +4,7 @@ const db = require('../database');
 
 var router = express.Router();
 
-/* GET users listing. */
+/* GET bid listing. */
 router.get("/", (req, res, next) => {
   var sql = "select * from bids"
   var params = []
