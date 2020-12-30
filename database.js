@@ -32,7 +32,7 @@ let db = new sqlite3.Database(DBSOURCE, (err) => {
                 console.log("table created")
                 var insert = 'INSERT INTO auctions (name) VALUES (?)'
                 db.run(insert, ["Angel Tree"])
-                db.run(insert, ["test 1"])
+                db.run(insert, ["Automobile"])
             }
         });  
     }
