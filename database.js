@@ -9,7 +9,7 @@ let db = new sqlite3.Database(DBSOURCE, (err) => {
       throw err
     }else{
         console.log('Connected to the SQLite database.')
-        db.run(`CREATE TABLE bids (id INTEGER PRIMARY KEY AUTOINCREMENT, user text, bid text)`,
+        db.run(`CREATE TABLE bids (id INTEGER PRIMARY KEY AUTOINCREMENT, auctionName text, user text, bid text)`,
         (err) => {
             if (err) {
                 // Table already created
@@ -17,9 +17,10 @@ let db = new sqlite3.Database(DBSOURCE, (err) => {
             }else{
                 // Table just created, creating some rows
                 console.log("table created")
-                var insert = 'INSERT INTO bids (user, bid) VALUES (?,?)'
-                db.run(insert, ["admin","20"])
-                db.run(insert, ["user","30"])
+                var insert = 'INSERT INTO bids (auctionName, user, bid) VALUES (?,?,?)'
+                db.run(insert, ["Angel Tree", "admin","20"])
+                db.run(insert, ["Angel Tree", "user","30"])
+                db.run(insert, ["Automobile", "user","30"])
             }
         });  
         db.run(`CREATE TABLE auctions (id INTEGER PRIMARY KEY AUTOINCREMENT, name text)`,

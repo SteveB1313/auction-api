@@ -4,7 +4,7 @@ const db = require('../database');
 
 var router = express.Router();
 
-/* GET bid listing. */
+/* GET all auctions */
 router.get("/", (req, res, next) => {
   var sql = "select * from auctions"
   var params = []
@@ -20,6 +20,23 @@ router.get("/", (req, res, next) => {
     });
 });
 
+/* GET an auction by id */
+router.get("/:id", (req, res, next) => {
+  var sql = "select * from auctions where id = ?"
+  var params = [req.params.id]
+  db.all(sql, params, (err, row) => {
+      if (err) {
+        res.status(400).json({"error":err.message});
+        return;
+      }
+      res.json({
+          "message":"success",
+          "data":row
+      })
+    });
+});
+
+// create a new auction
 router.post("/", (req, res, next) => {
   var errors = [];
   if (!req.body.auctionName){
@@ -47,6 +64,7 @@ router.post("/", (req, res, next) => {
   });
 })
 
+// delete an auction
 router.delete("/:id", (req, res, next) => {
   db.run(
       'DELETE FROM auctions WHERE id = ?',
