@@ -22,6 +22,19 @@ let db = new sqlite3.Database(DBSOURCE, (err) => {
                 db.run(insert, ["user","30"])
             }
         });  
+        db.run(`CREATE TABLE auctions (id INTEGER PRIMARY KEY AUTOINCREMENT, name text)`,
+        (err) => {
+            if (err) {
+                // Table already created
+                console.error(err.message)
+            }else{
+                // Table just created, creating some rows
+                console.log("table created")
+                var insert = 'INSERT INTO auctions (name) VALUES (?)'
+                db.run(insert, ["Angel Tree"])
+                db.run(insert, ["test 1"])
+            }
+        });  
     }
 });
 
