@@ -3,9 +3,29 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    
   </head>
   <body>
     <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <p>Welcome to the auction API.</p>
+    <p>The auctions currently running are...</p>
+    <div id="auctions"></div>
+    <script>
+      const auctionsElement = document.querySelector('#auctions');
+
+      const apiUrl = 'http://localhost:3000/auctions';
+
+      async function getAuctions() {
+        const response = await fetch(apiUrl);
+        const json = await response.json();
+        json.data.forEach((auction) => {
+          const lineBreak = document.createElement('br');
+          const auctionName = document.createTextNode(auction.name);
+          auctionsElement.append(auctionName);
+          auctionsElement.append(lineBreak);
+        });
+      }
+      getAuctions();
+    </script>
   </body>
 </html>
