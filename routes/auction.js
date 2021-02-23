@@ -64,9 +64,6 @@ router.post("/", (req, res, next) => {
   });
 })
 
-<<<<<<< HEAD
-module.exports = router;
-=======
 // delete an auction
 router.delete("/:id", (req, res, next) => {
   db.run(
@@ -82,4 +79,3 @@ router.delete("/:id", (req, res, next) => {
 })
 
 module.exports = router;
->>>>>>> c74055557b7349cca127c4e67a1baa5004edd53e
