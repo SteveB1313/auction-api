@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= data[0].auctionName %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' /><!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <h1><%= data[0].auctionName %></h1>
+    <p>Displaying bids for <%= data[0].auctionName %></p>
+    <p><a href="/">Home</a></p>
+    <table class="table table-striped">
+      <tr>
+        <th>Bid User</th>
+        <th>Bid Amount</th>
+      </tr>
+      <% for(var i=0; i < data.length; i++) { %>
+         <tr>
+           <td><%= data[i].bidUser %></td>
+           <td><%= data[i].bidAmount %></td>
+         </tr>
+      <% } %>
+      </table>
+      <p>Bid on this auction!</p>
+      <form action="/bids" method="POST">
+        <input type="hidden" value="<%= data[0].auctionName %>" name="auctionName" />
+        <label for="bidUser">User ID:</label>
+        <input type="text" id="bidUser" name="user">
+        <label for="bidAmount">Bid Amount:</label>
+        <input type="text" id="bidAmount" name="bid">
+        <input type="submit">
+      </form>
+  </body>
+</html>

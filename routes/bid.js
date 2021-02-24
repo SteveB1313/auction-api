@@ -36,6 +36,7 @@ router.get("/:auctionName", (req, res, next) => {
     });
 });
 
+// bid on an auction
 router.post("/", (req, res, next) => {
   var errors = [];
   if (!req.body.auctionName){
@@ -63,12 +64,19 @@ router.post("/", (req, res, next) => {
       res.status(400).json({"error": err.message});
       return;
     }
-    res.json({
-      "message": "success",
-      "data": data,
-      "id" : this.lastID
-    })
+    // res.json({ "message": "success", "data": data, "id" : this.lastID })
   });
+  var sql = "select * from bids where auctionName = ?"
+  var params = [req.body.auctionName]
+  db.all(sql, params, (err, rows) => {
+      if (err) {
+        res.status(400).json({"error":err.message});
+        return;
+      }
+      // res.json({ "message":"success", "data":row })
+      res.render('auctionDetail', {"data": rows})
+
+    });
 })
 
 module.exports = router;

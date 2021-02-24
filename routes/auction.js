@@ -21,17 +21,16 @@ router.get("/", (req, res, next) => {
 
 /* GET an auction by id */
 router.get("/:id", (req, res, next) => {
-  var sql = "select * from auctions where auctionName = ?"
+  var sql = "select * from bids where auctionName = ?"
   var params = [req.params.id]
-  db.all(sql, params, (err, row) => {
+  db.all(sql, params, (err, rows) => {
       if (err) {
         res.status(400).json({"error":err.message});
         return;
       }
-      res.json({
-          "message":"success",
-          "data":row
-      })
+      // res.json({ "message":"success", "data":row })
+      res.render('auctionDetail', {"data": rows})
+
     });
 });
 
