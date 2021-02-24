@@ -13,15 +13,15 @@ router.get("/", (req, res, next) => {
         res.status(400).json({"error":err.message});
         return;
       }
-      // res.json({"message":"success", "data":rows })
-      res.render('auctions', {'title':'Auctions', "data":rows })
+      res.json({"message":"success", "data":rows })
+      //res.render('auctions', {'title':'Auctions', "data":rows })
     
     });
 });
 
 /* GET an auction by id */
 router.get("/:id", (req, res, next) => {
-  var sql = "select auctions.auctionName, bids.bidUser, bids.bidAmount from auctions,bids where auctions.auctionName = ?"
+  var sql = "select * from auctions where auctionName = ?"
   var params = [req.params.id]
   db.all(sql, params, (err, row) => {
       if (err) {
@@ -41,15 +41,19 @@ router.post("/", (req, res, next) => {
   if (!req.body.auctionName){
     errors.push("No auction name specified");
   }
+  if (!req.body.auctionDescription){
+    errors.push("No auction description specified");
+  }
   if (errors.length){
     res.status(400).json({"error":errors.join(",")});
     return;
   }
   var data = {
     auctionName: req.body.auctionName,
+    auctionDescription: req.body.auctionDescription,
   }
-  var sql = 'insert into auctions (name) values (?)';
-  var params = [data.auctionName]
+  var sql = 'insert into auctions (auctionName, auctionDescription) values (?,?)';
+  var params = [data.auctionName, data.auctionDescription]
   db.run(sql, params, function(err, result) {
     if(err) {
       res.status(400).json({"error": err.message});
