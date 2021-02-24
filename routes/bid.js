@@ -56,7 +56,7 @@ router.post("/", (req, res, next) => {
     user: req.body.user,
     bid: req.body.bid
   }
-  var sql = 'insert into bids (auctionName, user, bid) values (?, ?, ?)';
+  var sql = 'insert into bids (auctionName, bidUser, bidAmount) values (?, ?, ?)';
   var params = [data.auctionName, data.user, data.bid]
   db.run(sql, params, function(err, result) {
     if(err) {

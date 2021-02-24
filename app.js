@@ -31,11 +31,7 @@ app.use(cors());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/bids', bidRouter);
-<<<<<<< HEAD
-app.use('/auction', auctionRouter);
-=======
 app.use('/auctions', auctionRouter);
->>>>>>> c74055557b7349cca127c4e67a1baa5004edd53e
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

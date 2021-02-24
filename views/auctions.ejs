@@ -7,8 +7,14 @@
   <body>
     <h1><%= title %></h1>
     <p>Displaying all Auctions</p>
-    <% if (data) { %>
-      <p><%= data %></p>
-    <% } %>
+    <table>
+      <% for(var i=0; i < data.length; i++) { %>
+         <tr>
+           <td><%= data[i].id %></td>
+           <td><a href="http://localhost:30000/auctions/<%= data[i].auctionName %>"><%= data[i].auctionName %></td>
+           <td><%= data[i].auctionDescription %></td>
+         </tr>
+      <% } %>
+      </table>
   </body>
 </html>
