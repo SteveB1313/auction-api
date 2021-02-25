@@ -10,6 +10,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>    
+    <script src="/js/lib.js"></script>
+    <script> 
+    function deleteAuction() {
+      var x = document.getElementById("auctionName").innerText;
+      console.log(x);
+      const http = new DeleteHTTP; 
+      // Update Post 
+      http.delete(`/auctions/${x}`); 
+      location.replace("/");
+    }
+    </script>
   </head>
   <body>
     <h1><%= title %></h1>
@@ -18,9 +29,11 @@
     <table class="table table-striped">
       <% for(var i=0; i < data.length; i++) { %>
          <tr>
-           <td><a href="auctions/<%= data[i].auctionName %>"><%= data[i].auctionName %></a> - <%= data[i].auctionDescription %></td>
+           <td><a id="auctionName" href="bids/<%= data[i].auctionName %>"><%= data[i].auctionName %></a> - <%= data[i].auctionDescription %></td>
+           <td><input type="button" onclick="deleteAuction()">Delete</a></td>
          </tr>
       <% } %>
     </table>
+    <p><a href="/auctions">Create</a> an Auction!</p>
   </body>
 </html>

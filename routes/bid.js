@@ -20,19 +20,17 @@ router.get("/", (req, res, next) => {
     });
 });
 
-/* GET all for an auction. */
-router.get("/:auctionName", (req, res, next) => {
+/* GET all bids for an auction. */
+router.get("/:id", (req, res, next) => {
   var sql = "select * from bids where auctionName = ?"
-  var params = [req.params.auctionName]
+  var params = [req.params.id]
   db.all(sql, params, (err, rows) => {
       if (err) {
         res.status(400).json({"error":err.message});
         return;
       }
-      res.json({
-          "message":"success",
-          "data":rows
-      })
+      // res.json({ "message":"success", "data":row })
+      res.render('auctionBids', {"data": rows})
     });
 });
 
@@ -74,7 +72,7 @@ router.post("/", (req, res, next) => {
         return;
       }
       // res.json({ "message":"success", "data":row })
-      res.render('auctionDetail', {"data": rows})
+      res.render('auctionBids', {"data": rows})
 
     });
 })

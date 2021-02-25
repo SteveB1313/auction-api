@@ -17,13 +17,13 @@
     <p><a href="/">Home</a></p>
     <table class="table table-striped">
       <tr>
-        <th>Auction Name</th>
-        <th>Auction Detail</th>
+        <th>Bid User</th>
+        <th>Bid Amount</th>
       </tr>
       <% for(var i=0; i < data.length; i++) { %>
          <tr>
-           <td><%= data[i].auctionName %></td>
-           <td><%= data[i].auctionDescription %></td>
+           <td><%= data[i].bidUser %></td>
+           <td><%= data[i].bidAmount %></td>
          </tr>
       <% } %>
       </table>
